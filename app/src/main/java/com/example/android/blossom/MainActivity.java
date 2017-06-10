@@ -178,10 +178,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // push
         if (data.equals("204")) {
             Log.e(LOG_TAG, "the event put to the server");
+            System.exit(0);
             return;
         }
         if (data.equals("error")) {
             Log.e(LOG_TAG, "error while put event to the server");
+            System.exit(0);
             return;
         }
         // post
