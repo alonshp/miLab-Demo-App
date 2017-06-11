@@ -109,11 +109,7 @@ public final class Utils {
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (conn.getResponseCode() == 200) {
-                return "200";
-            } else if (conn.getResponseCode() == 404) {
-                return "404";
-            } else if (conn.getResponseCode() == 204) {
+            if (conn.getResponseCode() == 204) {
                 return "204";
             } else {
                 Log.e(LOG_TAG, "Error response code: " + conn.getResponseCode());
