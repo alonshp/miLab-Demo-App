@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 }, 7000);
             }
         });
-
-        addActivityFence();
+        // TODO: 11/06/2017 add activity fence
+//        addActivityFence();
     }
 
     @Override
@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onStart();
 
         // We want to receive Broadcasts when activity is paused
-        registerReceiver(mFenceReceiver, new IntentFilter(MY_FENCE_RECEIVER_ACTION));
+        // TODO: 11/06/2017 register the activity receiver
+//        registerReceiver(mFenceReceiver, new IntentFilter(MY_FENCE_RECEIVER_ACTION));
     }
 
     @Override
@@ -215,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("", "Problem parsing the earthquake JSON results", e);
+            Log.e("", "Problem parsing the JSON results", e);
         }
     }
 
