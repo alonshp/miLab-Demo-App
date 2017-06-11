@@ -307,6 +307,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onClick(View v) {
                 manager.removeView(view);
+                System.exit(0);
             }
         });
         manager.addView(view, layoutParams);
