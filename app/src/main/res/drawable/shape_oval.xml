@@ -16,7 +16,7 @@
     <item android:state_pressed="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="oval">
-            <solid android:color="@android:color/darker_gray" />
+            <solid android:color="@android:color/transparent" />
             <corners android:bottomRightRadius="8dp"
                 android:bottomLeftRadius="8dp"
                 android:topRightRadius="8dp"

@@ -5,7 +5,6 @@ import android.app.LoaderManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -179,12 +178,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // push
         if (data.equals("204")) {
             Log.e(LOG_TAG, "the event put to the server");
+            Toast.makeText(this, "put",
+                    Toast.LENGTH_LONG).show();
             System.exit(0);
             return;
         }
         if (data.equals("error")) {
             Log.e(LOG_TAG, "error while put event to the server");
-            System.exit(0);
+//            System.exit(0);
             return;
         }
         // post
@@ -293,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // update user name
         TextView userName = (TextView) view.findViewById(R.id.available_user);
-        userName.setText(name);
+        userName.setText("Call " + name + "?");
 
         available.setOnClickListener(new View.OnClickListener() {
             @Override
