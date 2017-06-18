@@ -62,7 +62,8 @@ public final class Utils {
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
         try {
-            jsonResponse = makePut(url, userID_1, userID_2, familyID);
+//            jsonResponse = makePut(url, userID_1, userID_2, familyID);
+            jsonResponse = updateFlower(url);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
@@ -126,6 +127,43 @@ public final class Utils {
         }
         conn.disconnect();
         return "error";
+    }
+
+    private static String updateFlower(URL url) throws IOException {
+        String jsonResponse = "";
+// If the URL is null, then return early.
+        if (url == null) {
+            return jsonResponse;
+        }
+
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        try {
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(10000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setRequestMethod("GET");
+            urlConnection.connect();
+
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
+            }
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        return "204";
     }
 
     /**

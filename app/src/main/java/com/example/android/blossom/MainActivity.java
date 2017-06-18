@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button test = (Button) findViewById(R.id.test_bn);
+        final Button test = (Button) findViewById(R.id.test_bn);
 
         mGoogleApiClient = new GoogleApiClient.Builder(MainActivity.this)
                 .addApi(Awareness.API)
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                test.setVisibility(View.GONE);
                 // show popup delayed
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             Uri.Builder uriBuilder = baseUri.buildUpon();
             return new AvailableLoader(this, uriBuilder.toString(), userID1);
         } else {
-            Uri baseUri = Uri.parse("https://milab-blossom.herokuapp.com/");
+            Uri baseUri = Uri.parse("http://blynk-cloud.com/14f620c6c7ac472e82f44bba939e5789/update/V0?value=70");
             Uri.Builder uriBuilder = baseUri.buildUpon();
             return new CallLoader(this, uriBuilder.toString(), userID1, userID, familyID);
         }
@@ -195,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Toast.makeText(this, "There is no one available right now",
                         Toast.LENGTH_LONG).show();
                 Log.e(LOG_TAG, "no one available right now!");
+                System.exit(0);
             } else {
                 // found user available
                 // build up a list of Earthquake objects with the corresponding data.
@@ -299,7 +301,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         available.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addCallLoader();
+                // update flower delayed
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        addCallLoader();
+                    }
+                }, 7000);
+//                addCallLoader();
                 manager.removeView(view);
                 makeCall(phoneNumber);
             }
